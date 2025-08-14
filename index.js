@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 // Import the Express framework so we can create a server and handle HTTP requests
 const express = require("express");
 
@@ -14,8 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 //routes
-app.use('/api/products', productRoute)
-
+app.use("/api/products", productRoute);
 
 // Define a simple GET route for the root URL '/'
 // req = request (data coming in), res = response (data going out)
@@ -26,26 +27,17 @@ app.get("/", (req, res) => {
 
 // Connect to MongoDB using Mongoose
 // The string inside connect() is the MongoDB connection URL
-mongoose
-  .connect(
-    "mongodb+srv://TestCRUD:TESTCRUD12345xxx@backenddb.pbb6qqt.mongodb.net/?retryWrites=true&w=majority&appName=BackendDB"
-  )
-  .then(() => {
-    // Runs if connection is successful
-    console.log("Connected to database successfully");
-    // Start the server on port 3000
-    app.listen(3000, () => {
-      // The callback runs once the server is successfully up and running
-      console.log("Server is running on port 3000");
-    });
-  })
-  .catch(() => {
-    // Runs if connection fails
-    console.log("Connection to database failed");
+mongoose.connect(process.env.MONGO_URI).then(() => {
+  console.log("Connected to database successfully");
+  app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}
+      `);
   });
-
-
-
+})
+.catch(() => {
+  console.log("Connection to database failed");
+  
+})
 /* CONTROLLERS: always create them here before moving them to their specific files*/
 // getting all products using .find
 // app.get("/api/products", async (req, res) => {
