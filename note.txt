@@ -1,0 +1,37 @@
+Learning CRUD OPERATIONS (Create, Read, Update, Delete)
+
+index.js — This is the entry point of the backend application. It’s where:
+
+You set up your Express app.
+
+You connect to the MongoDB database.
+
+You define basic routes to check if the server works.
+
+You start the server so it can listen for requests.
+----------------------------------------------------------------
+
+models/ — This folder stores all your Mongoose models (schemas). A model is the blueprint for how your data will look in the database. For example, if you have users, you define name, email, password here.
+
+---------------------------------------------------------------------
+routes/ — This folder holds all the route definitions. Instead of writing all the routes in index.js, you create separate files (e.g., userRoutes.js, postRoutes.js) to keep your code organized.
+
+------------------------------------------------------------------------
+controllers/ — This is where you keep the logic for each route. The routes file only defines the path and method (GET, POST, etc.), but the controller does the actual work, like saving a user to the database.
+-------------------------------------------------------------------------------
+
+middlewares/ — Middlewares are functions that run before your main route logic. They’re used for tasks like checking if a user is logged in, validating data, or logging requests.
+--------------------------------------------------------------------------------------
+
+config/ — This is for configuration files like database connection setup, environment variables, and constants.
+
+---------------------------------------------------------------------------------------------------------------------
+
+.env — This file stores sensitive info like your database connection string, secret keys, and API keys. Never push it to GitHub.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+package.json — This file lists all the dependencies (packages) your project uses, plus scripts to run your app.
+
+------------------------------------------------------------------------------------------------------------------------------
+README.md — This is your project’s guide. It explains what the project does, how to install it, and how to use the API.
