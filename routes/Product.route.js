@@ -1,6 +1,6 @@
 const express = require("express");
 const Product = require("../models/product.model.js");
-const router = express.Router();
+const { authMiddleware, isAdmin } = require("../middlewares/auth");
 const {
   getProducts,
   getProduct,
@@ -9,15 +9,18 @@ const {
   deleteProduct,
 } = require("../controllers/product.controller.js");
 
+const router = express.Router();
+
 router.get("/", getProducts);
 router.get("/:id", getProduct);
 
-router.post("/", createProduct);
+// Only logged in users can create products
+router.post("/", authMiddleware, createProduct);
 
-// update a product
-router.put('/:id', updateProduct);
+// Only admins can update products
+router.put('/:id', authMiddleware, isAdmin, updateProduct);
 
-// delete a product
-router.delete("/:id", deleteProduct);
+// Only admins can delete products
+router.delete('/:id', authMiddleware, isAdmin, deleteProduct);
 
 module.exports = router;
