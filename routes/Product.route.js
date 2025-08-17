@@ -14,13 +14,13 @@ const router = express.Router();
 router.get("/", getProducts);
 router.get("/:id", getProduct);
 
-// Only logged in users can create products
-router.post("/", authMiddleware, createProduct);
+// Only admins can create products
+router.post("/", authMiddleware, isAdmin, createProduct);
 
 // Only admins can update products
-router.put('/:id', authMiddleware, isAdmin, updateProduct);
+router.put("/:id", authMiddleware, isAdmin, updateProduct);
 
 // Only admins can delete products
-router.delete('/:id', authMiddleware, isAdmin, deleteProduct);
+router.delete("/:id", authMiddleware, isAdmin, deleteProduct);
 
 module.exports = router;
